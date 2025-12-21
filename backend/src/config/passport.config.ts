@@ -62,5 +62,15 @@ passport.use(
   )
 );
 
-passport.serializeUser((user: any, done) => done(null, user));
-passport.deserializeUser((user: any, done) => done(null, user));
+import User from "../models/user.model";
+
+passport.serializeUser((user: any, done) => done(null, user._id));
+
+passport.deserializeUser(async (id: any, done) => {
+  try {
+    const user = await User.findById(id);
+    done(null, user);
+  } catch (error) {
+    done(error, null);
+  }
+});

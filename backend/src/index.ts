@@ -23,6 +23,8 @@ import taskRoutes from "./routes/task.route";
 const app = express();
 const BASE_PATH = config.BASE_PATH;
 
+app.set("trust proxy", 1);
+
 app.use(express.json());
 
 app.use(express.urlencoded({ extended: true }));
